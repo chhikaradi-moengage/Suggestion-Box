@@ -1,12 +1,12 @@
 .suggestions {
     position: absolute;
-    left: 18px;
+    left: 16px;
     right: 0;
     top: 100%;
     padding: 0;
     margin-top: 10px;
     background-color: #f9f9f9;
-    max-width: 90%;
+    max-width: 92%;
     overflow-y: auto;
     margin-top: 0px;
     -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -16,4 +16,37 @@
 li {
     margin-top: 10px;
     margin-left: 10px;
+}
+
+.suggestions li {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.suggestions li:hover {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-weight:bold;
+    /*text-decoration: underline;*/
+}
+
+.selected-city {
+    margin-left: 10px;
+    font-weight:bold;
+}
+
+.filter-cities{
+    border-width: 0 0 1px;
+    -webkit-box-shadow: none !important;
+    padding: 0px;
+    border-radius: 0px;
+}
+
+#filter::after
+{
+    font-family: 'FontAwesome';
+    color:red;
+    position: relative;
+    left: 0px;
+    content: "\f007";
 }

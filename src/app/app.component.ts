@@ -15,28 +15,32 @@ export class AppComponent {
             city: 'Mumbai',
             state: 'Maharashtra',
             country: 'India',
-            cityString: 'Mumbai, Maharashtra, India'
+            cityString: 'Mumbai, Maharashtra, India',
+            selectedClass: ''
         },
         {
             id: '2',
             city: 'Delhi',
             state: 'Delhi',
             country: 'India',
-            cityString: 'Delhi, Delhi, India'
+            cityString: 'Delhi, Delhi, India',
+            selectedClass: ''
         },
         {
             id: '3',
             city: 'Banglore',
             state: 'Karnataka',
             country: 'India',
-            cityString: 'Banglore, Karnataka, India'
+            cityString: 'Banglore, Karnataka, India',
+            selectedClass: ''
         },
         {
             id: '4',
             city: 'Gurgaon',
             state: 'Haryana',
             country: 'India',
-            cityString: 'Gurgaon, Haryana, India'
+            cityString: 'Gurgaon, Haryana, India',
+            selectedClass: ''
         }
     ];
 
@@ -58,6 +62,9 @@ export class AppComponent {
         this.selectedCity = obj;
         this.cityToSearch = obj.city || '';
         this.selectedCities = [];
+
+        // write your code here after selecting a city
+
     }
 
     onBlur() {
@@ -66,6 +73,41 @@ export class AppComponent {
 
     onFocus() {
         this.setSelectedCities(this.cityToSearch);
+    }
+
+    onKeydown(event) {
+
+        var getSelectedCityIndex = function (arr) {
+            for (let i = 0; i < arr.length; i += 1) {
+                if (arr[i].selectedClass) {
+                    return i;
+                }
+            }
+            return -1;
+        };
+
+        var checkForArrowKey = function(keyCode, selectedCities) {
+            let i;
+            let selectedIndex = getSelectedCityIndex(selectedCities);
+            if (selectedIndex !== -1) {
+                selectedCities[selectedIndex].selectedClass = '';
+            }
+            if ( keyCode === -1 || (keyCode === 38 && selectedIndex > 0) ) {
+                selectedCities[selectedIndex - 1].selectedClass = 'selected-city';
+            } else if ( keyCode === -1 || (keyCode === 40 && selectedIndex < (selectedCities.length - 1)) ) {
+                selectedCities[selectedIndex + 1].selectedClass = 'selected-city';
+            }
+        };
+
+        if ( event.keyCode === 27 ) {
+            this.selectedCities = [];
+        }else if ( event.keyCode === 38 || event.keyCode === 40 ) {
+            checkForArrowKey(event.keyCode, this.selectedCities);
+        } else if (event.keyCode === 13) {
+            var selectedIndex = getSelectedCityIndex(this.selectedCities);
+            this.cityToSearch = this.selectedCities[selectedIndex].city;
+            this.selectedCities = [];
+        }
     }
 
 
